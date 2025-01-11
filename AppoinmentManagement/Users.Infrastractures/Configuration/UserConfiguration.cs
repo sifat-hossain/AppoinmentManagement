@@ -22,5 +22,14 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired()
             .HasMaxLength(Constants.FieldSize.Password);
 
+        builder.HasData(
+            new User
+            {
+                Id = 0,
+                UserName = "demo",
+                Password = "$2a$11$aOVqtiiybxRP8jVf0Mye7./nR7QUW74fnuTrUjyTXpZ5fYYjKNrP6"
+            }
+            );
+
     }
 }
