@@ -20,10 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Appoinment.Application\Appointments.Application.csproj" />
-    <ProjectReference Include="..\Appoinment.Domain\Appoinments.Domain.csproj" />
-    <ProjectReference Include="..\Appointment.Application\Appointments.Application.csproj" />
-    <ProjectReference Include="..\Appointment.Domain\Appointments.Domain.csproj" />
+    <ProjectReference Include="..\Appointments.Application\Appointments.Application.csproj" />
+    <ProjectReference Include="..\Appointments.Domain\Appointments.Domain.csproj" />
+    <ProjectReference Include="..\Appointments.Framework\Appointments.Framework.csproj" />
   </ItemGroup>
 
 </Project>

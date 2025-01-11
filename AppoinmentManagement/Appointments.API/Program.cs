@@ -66,18 +66,6 @@ builder.Services.AddSwaggerGen(c =>
 
             },
             new List<string>()
-        },
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "ApiKey"
-                }
-
-            },
-            new List<string>()
         }
     });
 });
@@ -111,9 +99,9 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Enviro
     app.UseSwaggerUI();
 }
 
-//app.UseHttpsRedirection();
-//app.UseAuthentication();
-//app.UseAuthorization();
-//app.MapControllers();
+app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
 app.Run();
 
