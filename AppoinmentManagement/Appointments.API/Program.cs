@@ -1,8 +1,7 @@
-using Appoinments.Application;
-using Appoinments.Application.Actions.Appoinments.Commands;
-using Appoinments.Application.Actions.Doctors.Query.PullDoctors;
-using Appoinments.Framework.Settings;
-using Appoinments.Infrastractures;
+using Appointments.Application;
+using Appointments.Application.Actions.Appointments.Commands;
+using Appointments.Framework.Settings;
+using Appointments.Infrastractures;
 using Identity.Http.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +12,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(jwtBearerOptions =>
     {
@@ -82,7 +82,7 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.AddDbContext<AppoinmentDbContext>(o =>
+builder.Services.AddDbContext<AppointmentDbContext>(o =>
 {
     o.UseSqlServer(builder.Configuration.GetConnectionString("AppointmentDbContext"));
     if (builder.Environment.IsDevelopment())
@@ -92,7 +92,7 @@ builder.Services.AddDbContext<AppoinmentDbContext>(o =>
     }
 });
 
-builder.Services.AddScoped<IAppoinmentDbContext, AppoinmentDbContext>();
+builder.Services.AddScoped<IAppointmentDbContext, AppointmentDbContext>();
 builder.Services.AddIdentityContext(options =>
 {
     string key = builder.Configuration["AuthSettings:SigningKey"];
@@ -100,8 +100,8 @@ builder.Services.AddIdentityContext(options =>
 });
 
 builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("AuthSettings"));
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(AppoinmentCreateHandler).GetTypeInfo().Assembly));
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(DoctorQueryHandler).GetTypeInfo().Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(AppointmentCreateHandler).GetTypeInfo().Assembly));
+//builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(DoctorQueryHandler).GetTypeInfo().Assembly));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -111,9 +111,9 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Enviro
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-app.UseAuthentication();
-app.UseAuthorization();
-app.MapControllers();
+//app.UseHttpsRedirection();
+//app.UseAuthentication();
+//app.UseAuthorization();
+//app.MapControllers();
 app.Run();
 

@@ -1,6 +1,5 @@
-﻿using Appoinments.Framework.Interfaces;
-using Appoinments.Framework.Settings;
-using Base.Domain;
+﻿using Appointments.Framework.Interfaces;
+using Appointments.Framework.Settings;
 using Users.Domain.Entities;
 using static BCrypt.Net.BCrypt;
 
@@ -14,17 +13,17 @@ namespace Users.Application.Actions.Users.Commands.LoginUser
     {
         private readonly IUserDbContext _userDbContext;
         private readonly AuthSettings _authSettings;
-        private readonly IDateTime _dateTime;
+        // private readonly IDateTime _dateTime;
         private readonly ITokenService _tokenService;
 
         public LoginUserHandler(IUserDbContext userDbContext,
             IOptions<AuthSettings> options,
-            IDateTime dateTime,
+            // IDateTime dateTime,
             ITokenService tokenService)
         {
             _userDbContext = userDbContext;
             _authSettings = options.Value;
-            _dateTime = dateTime;
+            // _dateTime = dateTime;
             _tokenService = tokenService;
         }
 

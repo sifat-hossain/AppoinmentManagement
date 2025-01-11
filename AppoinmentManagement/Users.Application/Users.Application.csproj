@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Appoinment.Framework\Appoinments.Framework.csproj" />
+    <ProjectReference Include="..\Appointment.Framework\Appointments.Framework.csproj" />
     <ProjectReference Include="..\Users.Domain\Users.Domain.csproj" />
   </ItemGroup>
 
