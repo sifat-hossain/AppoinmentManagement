@@ -1,0 +1,449 @@
+{
+	"info": {
+		"_postman_id": "67ea0c4f-f41f-4d01-9d81-32ca6f6feae0",
+		"name": "AppointmentManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15975177"
+	},
+	"item": [
+		{
+			"name": "CreateUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"test\",\r\n  \"password\": \"t123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{userUrl}}/User",
+					"host": [
+						"{{userUrl}}"
+					],
+					"path": [
+						"User"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.response.code===200 ?\r",
+							"pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.environment.set(\"accessToken\",jsonData.accessToken);\r",
+							"})\r",
+							":\r",
+							"    pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.expect(pm.response.to.have.status(200));\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"sifat\",\r\n  \"password\": \"s123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{userUrl}}/User/login",
+					"host": [
+						"{{userUrl}}"
+					],
+					"path": [
+						"User",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Doctor-create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.response.code===200 ?\r",
+							"pm.test(\"Status Code Is \"+pm.response.code+\", Number of Data= \"+pm.response.json()?.length,function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.environment.set(\"doctorId\",jsonData.model.id)\r",
+							"})\r",
+							":pm.response.code===403?\r",
+							"    pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.expect(pm.response.to.have.status(403));\r",
+							"})\r",
+							": pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.expect(pm.response.to.have.status(200||403));\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"doctorName\": \"Demo\",\r\n  \"isDeleted\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{appointmentUrl}}/Doctor/push",
+					"host": [
+						"{{appointmentUrl}}"
+					],
+					"path": [
+						"Doctor",
+						"push"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Doctor-Get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.response.code===200 ?\r",
+							"pm.test(\"Status Code Is \"+pm.response.code+\", Number of Data= \"+pm.response.json()?.length,function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							":pm.response.code===403?\r",
+							"    pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.expect(pm.response.to.have.status(403));\r",
+							"})\r",
+							": pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.expect(pm.response.to.have.status(200||403));\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"skip\": 0,\r\n  \"take\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{appointmentUrl}}/Doctor/pull",
+					"host": [
+						"{{appointmentUrl}}"
+					],
+					"path": [
+						"Doctor",
+						"pull"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Appointment - Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.response.code===200 ?\r",
+							"pm.test(\"Status Code Is \"+pm.response.code+\", Number of Data= \"+pm.response.json()?.length,function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							":pm.response.code===403?\r",
+							"    pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.expect(pm.response.to.have.status(403));\r",
+							"})\r",
+							": pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.expect(pm.response.to.have.status(200||403));\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"patientName\": \"Demo Ptient\",\r\n  \"phone\": \"0123456789\",\r\n  \"appointmentDateTime\": \"2025-01-20T15:14:13.212Z\",\r\n  \"doctorId\":{{doctorId}} ,\r\n  \"isDeleted\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{appointmentUrl}}/Appointment/push",
+					"host": [
+						"{{appointmentUrl}}"
+					],
+					"path": [
+						"Appointment",
+						"push"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Appointment - Get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.response.code===200 ?\r",
+							"pm.test(\"Status Code Is \"+pm.response.code+\", Number of Data= \"+pm.response.json()?.length,function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							":pm.response.code===403?\r",
+							"    pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.expect(pm.response.to.have.status(403));\r",
+							"})\r",
+							": pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.expect(pm.response.to.have.status(200||403));\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"skip\": 0,\r\n  \"take\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{appointmentUrl}}/Appointment/pull",
+					"host": [
+						"{{appointmentUrl}}"
+					],
+					"path": [
+						"Appointment",
+						"pull"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Appointment- Get By Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.response.code===200 ?\r",
+							"pm.test(\"Status Code Is \"+pm.response.code+\", Number of Data= \"+pm.response.json()?.length,function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							":pm.response.code===403?\r",
+							"    pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.expect(pm.response.to.have.status(403));\r",
+							"})\r",
+							": pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.expect(pm.response.to.have.status(200||403));\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{appointmentUrl}}/Appointment/2",
+					"host": [
+						"{{appointmentUrl}}"
+					],
+					"path": [
+						"Appointment",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Appointment - Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.response.code===200 ?\r",
+							"pm.test(\"Status Code Is \"+pm.response.code+\", Number of Data= \"+pm.response.json()?.length,function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							":pm.response.code===403?\r",
+							"    pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.expect(pm.response.to.have.status(403));\r",
+							"})\r",
+							": pm.test(\"Status Code Is \"+pm.response.code,function(){\r",
+							"    pm.expect(pm.response.to.have.status(200||403));\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{appointmentUrl}}/Appointment?id=1",
+					"host": [
+						"{{appointmentUrl}}"
+					],
+					"path": [
+						"Appointment"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
