@@ -16,8 +16,6 @@ namespace Users.Application.Actions.Users.Commands.CreateUser
         {
             try
             {
-
-
                 User? existingUser = await _userDbContext.User
                     .FirstOrDefaultAsync(u => u.UserName == request.UserName, cancellationToken: cancellationToken);
 

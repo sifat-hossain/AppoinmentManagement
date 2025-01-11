@@ -4,11 +4,11 @@ namespace Appointments.Domain.Entities;
 
 public class Doctor : BaseEntity
 {
-    /// <summary>Gets or sets the brand name.</summary>
-    /// <value>The brand name.</value>
+    /// <summary>Gets or sets the doctor name.</summary>
+    /// <value>The doctor name.</value>
     public string DoctorName { get; set; }
 
-    /// <summary>Gets or sets the products.</summary>
-    /// <value>The products.</value>
+    /// <summary>Gets or sets the appoinments.</summary>
+    /// <value>The appoinments.</value>
     public List<Appointment> Appointments { get; set; }
 }

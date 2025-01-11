@@ -7,22 +7,21 @@ public class AppointmentCreateCommand : IRequest<AppointmentResponse<Appointment
     /// </summary>
     public int Id { get; set; }
 
-    /// <summary>Gets or sets the customer name.</summary>
-    /// <value>The customer name</value>
+    /// <summary>Gets or sets the patient name.</summary>
+    /// <value>The patient name</value>
     public string PatientName { get; set; }
 
-    /// <summary>Gets or sets the customer phone.</summary>
-    /// <value>The customer phone.</value>
+    /// <summary>Gets or sets the patient phone.</summary>
+    /// <value>The patient phone.</value>
     public string Phone { get; set; }
 
 
-    /// <summary>Gets or sets the customer phone.</summary>
-    /// <value>The customer phone.</value>
+    /// <summary>Gets or sets the Appointment Date Time.</summary>
+    /// <value>The Appointment Date Time.</value>
     public DateTime AppointmentDateTime { get; set; }
 
-
-    /// <summary>Gets or sets the customer phone.</summary>
-    /// <value>The customer phone.</value>
+    /// <summary>Gets or sets the Doctor id.</summary>
+    /// <value>The Doctor id.</value>
     public int DoctorId { get; set; }
 
     /// <summary>

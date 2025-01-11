@@ -7,7 +7,7 @@ using static BCrypt.Net.BCrypt;
 namespace Users.Application.Actions.Users.Commands.LoginUser
 {
     /// <summary>
-    /// Represents logic for LoginUserCommand
+    /// Represents logic for Login User Command
     /// </summary>
     public class LoginUserHandler : IRequestHandler<LoginUserCommand, UserTokenModel>
     {
