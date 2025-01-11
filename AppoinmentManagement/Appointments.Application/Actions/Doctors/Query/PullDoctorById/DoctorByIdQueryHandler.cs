@@ -1,4 +1,4 @@
-﻿using Appointments.Application.Actions.Doctors;
+﻿using Appointments.Framework.Exceptions;
 
 namespace Appointments.Application.Actions.Doctors.Query.PullDoctorById;
 
@@ -14,6 +14,6 @@ public class DoctorByIdQueryHandler(IAppointmentDbContext appointmentDbContext) 
             .OrderByDescending(x => x.CreatedOn)
             .FirstOrDefaultAsync(cancellationToken: cancellationToken);
 
-        return brand == null ? throw new Exception("Doctor is not found") : DoctorModel.Create(brand);
+        return brand == null ? throw new NotFoundException("Doctor is not found") : DoctorModel.Create(brand);
     }
 }

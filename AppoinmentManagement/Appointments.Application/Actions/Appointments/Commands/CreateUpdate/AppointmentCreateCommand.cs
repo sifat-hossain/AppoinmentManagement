@@ -1,4 +1,4 @@
-﻿namespace Appointments.Application.Actions.Appointments.Commands;
+﻿namespace Appointments.Application.Actions.Appointments.Commands.CreateUpdate;
 
 public class AppointmentCreateCommand : IRequest<AppointmentResponse<AppointmentModel>>
 {

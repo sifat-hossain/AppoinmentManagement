@@ -1,4 +1,5 @@
-﻿using Users.Domain.Entities;
+﻿using Appointments.Framework.Exceptions;
+using Users.Domain.Entities;
 using static BCrypt.Net.BCrypt;
 
 namespace Users.Application.Actions.Users.Commands.CreateUser
@@ -20,10 +21,10 @@ namespace Users.Application.Actions.Users.Commands.CreateUser
                 User? existingUser = await _userDbContext.User
                     .FirstOrDefaultAsync(u => u.UserName == request.UserName, cancellationToken: cancellationToken);
 
-                //if (existingUser != null)
-                //{
-                //    throw new ConflictException(nameof(User), request.UserName);
-                //}
+                if (existingUser != null)
+                {
+                    throw new ConflictException(nameof(User), request.UserName);
+                }
 
 
                 var user = new User

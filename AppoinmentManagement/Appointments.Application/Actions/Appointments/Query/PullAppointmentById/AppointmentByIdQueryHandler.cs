@@ -1,4 +1,6 @@
-﻿namespace Appointments.Application.Actions.Appointments.Query.PullAppointmentById;
+﻿using Appointments.Framework.Exceptions;
+
+namespace Appointments.Application.Actions.Appointments.Query.PullAppointmentById;
 
 public class AppointmentByIdQueryHandler(IAppointmentDbContext appointmentDbContext) :
     IRequestHandler<AppointmentByIdQueryRequest, AppointmentModel>
@@ -14,6 +16,6 @@ public class AppointmentByIdQueryHandler(IAppointmentDbContext appointmentDbCont
             .OrderByDescending(x => x.CreatedOn)
             .FirstOrDefaultAsync(cancellationToken: cancellationToken);
 
-        return appointment == null ? throw new Exception("Appoinment is not found") : AppointmentModel.Create(appointment);
+        return appointment == null ? throw new NotFoundException("Appoinment is not found") : AppointmentModel.Create(appointment);
     }
 }

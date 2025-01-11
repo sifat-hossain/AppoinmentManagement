@@ -1,4 +1,4 @@
-﻿namespace Appointments.Application.Actions.Appointments.Commands;
+﻿namespace Appointments.Application.Actions.Appointments.Commands.CreateUpdate;
 
 public class AppointmentCreateHandler(IAppointmentDbContext appointmentDbContext) :
     IRequestHandler<AppointmentCreateCommand, AppointmentResponse<AppointmentModel>>
@@ -19,17 +19,30 @@ public class AppointmentCreateHandler(IAppointmentDbContext appointmentDbContext
             {
                 appointment = new Appointment
                 {
-                    CreatedOn = DateTime.UtcNow
+                    CreatedOn = DateTime.Now,
+                    PatientName = command.PatientName,
+                    AppointmentDateTime = command.AppointmentDateTime,
+                    DoctorId = command.DoctorId,
+                    Phone = command.Phone,
+                    IsDeleted = command.IsDeleted
                 };
+
                 _appointmentDbContext.Appointment.Add(appointment);
             }
-            appointment.PatientName = command.PatientName;
-            appointment.AppointmentDateTime = command.AppointmentDateTime;
-            appointment.DoctorId = command.DoctorId;
-            appointment.Phone = command.Phone;
-            appointment.IsDeleted = command.IsDeleted;
+            else
+            {
+                appointment.Id = command.Id;
+                appointment.ModifiedOn = DateTime.Now;
+                appointment.PatientName = command.PatientName;
+                appointment.AppointmentDateTime = command.AppointmentDateTime;
+                appointment.DoctorId = command.DoctorId;
+                appointment.Phone = command.Phone;
+                appointment.IsDeleted = command.IsDeleted;
 
+                _appointmentDbContext.Appointment.Update(appointment);
+            }
             await _appointmentDbContext.SaveChangesAsync(cancellationToken);
+
             return new AppointmentResponse<AppointmentModel>()
             {
                 IsSuccessful = true,

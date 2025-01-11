@@ -1,5 +1,6 @@
+using Appointments.API;
 using Appointments.Application;
-using Appointments.Application.Actions.Appointments.Commands;
+using Appointments.Application.Actions.Appointments.Commands.CreateUpdate;
 using Appointments.Framework.Settings;
 using Appointments.Infrastractures;
 using Identity.Http.Extensions;
@@ -29,7 +30,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-//builder.Services.AddControllers(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)));
+builder.Services.AddControllers(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

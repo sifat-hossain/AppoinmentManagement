@@ -50,8 +50,8 @@ public class TokenService : ITokenService
             issuer: _authSettings.Issuer,
             audience: _authSettings.Audience,
             claims: claims,
-            notBefore: DateTime.UtcNow,
-            expires: DateTime.UtcNow.AddMinutes(_authSettings.LifetimeMinutes),
+            notBefore: DateTime.Now,
+            expires: DateTime.Now.AddMinutes(_authSettings.LifetimeMinutes),
             signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
         );
 

@@ -7,6 +7,8 @@ using Users.Application.Actions.Users.Commands.LoginUser;
 
 namespace Users.API.Controllers
 {
+    [Authorize]
+    [ApiKeyFilterAttribute]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController(IMediator mediator) : ControllerBase
