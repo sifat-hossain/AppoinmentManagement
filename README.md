@@ -1,4 +1,8 @@
 # AppoinmentManagement
+Used Technology: Asp.net Core 8, MSSQL, Postman
+
+Coding Structure: Microservice, CLEAN Architechture, MediatR, JWT Token.
+
 Here are the instructions for running this project:
 1.	Download/Clone the application from GIT hub
 2.	I have created the project in Micro-service Concept and make separate project for AUTH, so that this auth application can be used in other project. 
