@@ -22,4 +22,7 @@ jobs:
         run: dotnet restore AppoinmentManagement/AppoinmentManagement.sln
 
       - name: Build
-        run: dotnet build AppoinmentManagement/AppoinmentManagement.sln --no-restore
+        run: dotnet build AppoinmentManagement/AppoinmentManagement.sln --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test AppoinmentManagement/AppoinmentManagement.sln --no-build --verbosity normal
